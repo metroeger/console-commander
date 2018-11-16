@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 import comparators.FileNameComparator;
 import comparators.SizeComparator;
+import java.util.InputMismatchException;
 
 public class ConsoleCommander {
 
@@ -80,15 +81,16 @@ public class ConsoleCommander {
         do {
             display(root);
             
+            try{              
             Scanner input = new Scanner(System.in);
-            System.out.print("If you wanna get in to a library, type it's number: ");
+            System.out.print("If you wanna get in to a library, type it's number (or 0 to go back): ");
             num = input.nextInt();
-            root =  getRoot(root, num);
-
-        } while (root != null);
-
-        System.out.println("no more");
-        
+            root =  getRoot(root, num);         
+            
+            }catch(InputMismatchException ex){
+                System.out.println("Ooops, try again!");
+            }
+        } while (root != null);        
     }
 
 }
